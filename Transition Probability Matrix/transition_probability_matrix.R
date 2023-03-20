@@ -27,7 +27,7 @@ eprobS <- dmatS %*% ecountS # empirical transitional probabilities
 # Un-structured Transition Probability Matrix
 
 # Define transition matrix
-Rtransition <- matrix(0.083, nrow = 12, ncol = 12)
+Rtransition <- matrix(0.083, nrow = 4, ncol = 4)
 diag(Rtransition) <- 0.0
 
 # Simulate sequence
