@@ -1,0 +1,47 @@
+# Structured Transition Probability Matrix
+
+# Transition matrix
+Stransition <- matrix(
+  c(1.00, 0.25, 0.25, 0.25,
+    0.25, 1.00, 0.25, 0.25,
+    0.25, 0.25, 1.00, 0.25,
+    0.25, 0.25, 0.25, 1.00), 
+  nrow = 4)
+
+# Simulate sequence
+n <- 32 # number of trials
+rand_seq <- numeric(n)
+cur <- sample(nrow(Stransition), size = 1)
+rand_seq[1] <- cur
+
+for (i in 2:length(rand_seq)) {
+  cur <- sample(nrow(Stransition), size = 1, prob = Stransition[cur, ])
+  rand_seq[i] <- cur
+}
+
+# Summarize sequence
+ecountS <- table(rand_seq[1:(n - 1)], rand_seq[2:n]) # empirical count of transitions
+dmatS <- diag(1 / rowSums(ecountS))
+eprobS <- dmatS %*% ecountS # empirical transitional probabilities
+
+# Un-structured Transition Probability Matrix
+
+# Define transition matrix
+Rtransition <- matrix(0.083, nrow = 12, ncol = 12)
+diag(Rtransition) <- 0.0
+
+# Simulate sequence
+n <- 32 # number of trials
+rand_seq <- numeric(n)
+cur <- sample(nrow(Rtransition), size = 1)
+rand_seq[1] <- cur
+
+for (i in 2:length(rand_seq)) {
+  cur <- sample(nrow(Rtransition), size = 1, prob = Rtransition[cur, ])
+  rand_seq[i] <- cur
+}
+
+# Summarize sequence
+ecountR <- table(rand_seq[1:(n - 1)], rand_seq[2:n]) # empirical count of transitions
+dmatR <- diag(1 / rowSums(ecountR))
+eprobR <- dmatR %*% ecountR # empirical transitional probabilities
