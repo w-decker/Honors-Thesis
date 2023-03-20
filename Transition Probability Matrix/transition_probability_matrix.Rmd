@@ -1,0 +1,25 @@
+---
+title: "Transition Probability Matrix"
+author: "Will Decker"
+date: "2023-03-20"
+output: html_document
+---
+
+#Transition Probability Matrix
+```{r}
+x <- c(1:12) # number of objects. In our case, sounds.
+
+mat <- matrix(0, nrow = length(x), ncol = length(x)) # empty probability matrix
+
+cur <- sample(x, size = 1) # choose which object is 'current object' or 'starting object'.
+
+trials = numeric(100) # number of trials
+
+# generate a probability matrix
+for (i in trials){
+  cur <- sample(x, size = 1, replace = FALSE, prob = mat[cur, ])
+  trials[i + 1] <- cur
+}
+
+```
+
