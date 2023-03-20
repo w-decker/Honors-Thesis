@@ -1,12 +1,8 @@
 # Structured Transition Probability Matrix
 
 # Transition matrix
-Stransition <- matrix(
-  c(1.00, 0.25, 0.25, 0.25,
-    0.25, 1.00, 0.25, 0.25,
-    0.25, 0.25, 1.00, 0.25,
-    0.25, 0.25, 0.25, 1.00), 
-  nrow = 4)
+Stransition <- matrix(0.25, nrow = 4, ncol = 4)
+diag(Stransition) <- 1.00
 
 # Simulate sequence
 n <- 32 # number of trials
