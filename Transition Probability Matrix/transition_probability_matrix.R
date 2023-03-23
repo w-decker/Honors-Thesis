@@ -47,11 +47,11 @@ X
 # Simulate sequence
 n <- 32 # number of trials
 rand_seq <- numeric(n)
-cur <- sample(nrow(Stransition), size = 1)
+cur <- sample(nrow(X), size = 1)
 rand_seq[1] <- cur
 
 for (i in 2:length(rand_seq)) {
-  cur <- sample(nrow(Stransition), size = 1, prob = Stransition[cur, ])
+  cur <- sample(nrow(X), size = 1, prob = X[cur, ])
   rand_seq[i] <- cur
 }
 
@@ -59,6 +59,8 @@ for (i in 2:length(rand_seq)) {
 ecountS <- table(rand_seq[1:(n - 1)], rand_seq[2:n]) # empirical count of transitions
 dmatS <- diag(1 / rowSums(ecountS))
 eprobS <- dmatS %*% ecountS # empirical transitional probabilities
+
+eprobS
 
 ## Un-structured Transition Probability Matrix
 
