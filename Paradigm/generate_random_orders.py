@@ -24,7 +24,7 @@ while len(order) < numstim:
 
 # print orders
 print(order)
-print(order[::-1])
+print(order[::-1]) # order 2 = order 1 in reverse
 
 # ouptut orders to .csv
 filename = "random_orders.csv"
