@@ -17,7 +17,7 @@ order = [syllables[initstate]]
 current_state = initstate
 
 while len(order) < numstim:
-    next_state = np.random.choice(range(12), p=randTPM[current_state, :])
+    next_state = np.random.choice(range(12), p=randTPM[current_state])
     if syllables[next_state] != order[-1]:
         order.append(syllables[next_state])
         current_state = next_state
