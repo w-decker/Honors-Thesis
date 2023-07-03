@@ -1,4 +1,4 @@
-# import numpy
+# import numpy and csv
 import numpy as np
 import csv
 
