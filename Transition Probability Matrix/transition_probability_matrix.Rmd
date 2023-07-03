@@ -74,11 +74,11 @@ eprobS
 # Un-structured Transition Probability Matrix
 ```{r}
 # Define transition matrix
-Rtransition <- matrix((1/12), nrow = 12, ncol = 12)
+Rtransition <- matrix((1/11), nrow = 12, ncol = 12)
 diag(Rtransition) <- 0.00
 
 # Simulate sequence
-n <- 32 # number of trials
+n <- 24 # number of trials
 rand_seq <- numeric(n)
 cur <- sample(nrow(Rtransition), size = 1)
 rand_seq[1] <- cur
