@@ -2,7 +2,7 @@
 import pandas as pd
 
 # load in list
-df = pd.read_csv('random_orders.csv', delimiter=',')
+df = pd.read_csv('structured_orders.csv', delimiter=',')
 order1 = list(df['Order 1'])
 order2 = list(df['Order 2'])
 
