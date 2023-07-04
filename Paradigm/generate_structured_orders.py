@@ -37,3 +37,10 @@ order1 = order
 order2 = order[::-1] # order 2 = order 1 in reverse
 print(order1)
 print(order2)
+
+# ouptut orders to .csv
+filename = "structured_orders.csv"
+with open(filename, "w", newline="") as csvfile:
+    writer = csv.writer(csvfile)
+    writer.writerow(["Order 1", "Order 2"])
+    writer.writerows(zip(order, order[::-1]))
