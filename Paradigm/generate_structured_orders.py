@@ -32,7 +32,7 @@ while len(order) < numstim:
         order.append(syllables[next_state])
         current_state = next_state
 
-# print orders and un-embed word list
+# print orders
 order1 = order
 order2 = order[::-1] # order 2 = order 1 in reverse
 print(order1)
