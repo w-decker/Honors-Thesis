@@ -1,6 +1,8 @@
-# import numpy and csv
+# imports
 import numpy as np
 import csv
+import random
+from itertools import chain
 
 # list of syllables
 syllables = ["di", "da", "du", "pi", "pa", "pu", "bi", "ba", "bu", "ti", "tu", "ta"]
@@ -32,3 +34,25 @@ with open(filename, "w", newline="") as csvfile:
     writer = csv.writer(csvfile)
     writer.writerow(["Order 1", "Order 2"])
     writer.writerows(zip(order, order[::-1]))
+
+################### Trying another way ###################
+
+# list of syllables
+syllables = ["di", "da", "du", "pi", "pa", "pu", "bi", "ba", "bu", "ti", "tu", "ta"]
+
+# generate orders
+numstim = 72 # 288/12
+anotherorder = []
+
+for i in range(numstim):
+    anotherorder.append(random.sample(syllables, k=len(syllables)))
+
+another1 = list(chain.from_iterable(anotherorder))
+another2 = list(chain.from_iterable(anotherorder[::-1]))
+
+# ouptut orders to .csv
+filename = "another_random.csv"
+with open(filename, "w", newline="") as csvfile:
+    writer = csv.writer(csvfile)
+    writer.writerow(["Order 1", "Order 2"])
+    writer.writerows(zip(another1, another2))
