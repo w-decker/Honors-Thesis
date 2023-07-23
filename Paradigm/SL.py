@@ -1,11 +1,10 @@
 import pandas as pd
 from psychopy.sound.backend_ptb import SoundPTB
-from psychopy import gui
+from psychopy import gui, event
+from psychopy.hardware import keyboard
 import time
 
-# load stimuli
-sounds = pd.read_csv('/Users/lendlab/Box Sync/willdecker/LSU Undergrad/Honors-Thesis/github/Honors-Thesis/Paradigm/structured_orders_predetermined_words.csv')
-sounds = sounds['Order 1']
+# sound dir filepath
 sound_dir = '/Users/lendlab/Desktop/sounds/'
 
 # set conditions
@@ -16,8 +15,17 @@ myDlg.addText('Order')
 myDlg.addField('Order:', choices=['1', '2'])
 ok_data = myDlg.show()  
 
+
+# catch trigger
+begin = False
+keys = event.getKeys()
+if keys[0] != '5':
+     keys = event.getKeys()
+elif keys[0] == '5':
+    begin = True
+    
 # play structured, order 1
-if ok_data[0] == 'structured' and ok_data[1] == '1':
+if begin == True and ok_data[0] == 'structured' and ok_data[1] == '1':
     sounds = pd.read_csv('/Users/lendlab/Box Sync/willdecker/LSU Undergrad/Honors-Thesis/github/Honors-Thesis/Paradigm/structured_orders_predetermined_words.csv')
     sounds = sounds['Order 1']
     for i in range(len(sounds)):
@@ -27,7 +35,7 @@ if ok_data[0] == 'structured' and ok_data[1] == '1':
         time.sleep(0.50)
         
 # play structured, order 2        
-elif ok_data[0] == 'structured' and ok_data[1] == '2': 
+elif begin == True and ok_data[0] == 'structured' and ok_data[1] == '2': 
     sounds = pd.read_csv('/Users/lendlab/Box Sync/willdecker/LSU Undergrad/Honors-Thesis/github/Honors-Thesis/Paradigm/structured_orders_predetermined_words.csv')
     sounds = sounds['Order 2']
     for i in range(len(sounds)):
@@ -37,7 +45,7 @@ elif ok_data[0] == 'structured' and ok_data[1] == '2':
         time.sleep(0.50)
 
 # play random, order 1
-elif ok_data[0] == 'random' and ok_data[1] == '1': 
+elif begin == True and ok_data[0] == 'random' and ok_data[1] == '1': 
     sounds = pd.read_csv('/Users/lendlab/Box Sync/willdecker/LSU Undergrad/Honors-Thesis/github/Honors-Thesis/Paradigm/random_orders.csv')
     sounds = sounds['Order 1']
     for i in range(len(sounds)):
@@ -47,7 +55,7 @@ elif ok_data[0] == 'random' and ok_data[1] == '1':
         time.sleep(0.50)
         
 # play random, order 2
-elif ok_data[0] == 'random' and ok_data[1] == '2': 
+elif begin == True and ok_data[0] == 'random' and ok_data[1] == '2': 
     sounds = pd.read_csv('/Users/lendlab/Box Sync/willdecker/LSU Undergrad/Honors-Thesis/github/Honors-Thesis/Paradigm/random_orders.csv')
     sounds = sounds['Order 2']
     for i in range(len(sounds)):
