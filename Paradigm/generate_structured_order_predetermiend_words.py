@@ -8,7 +8,7 @@ import csv
 words = [['pi', 'tu', 'bi'], ['bu', 'pa', 'da'], ['di', 'ba', 'pu'], ['ta', 'ti', 'du']]
 
 # create order
-numstim = 24
+numstim = 48
 order = []
 for i in range(numstim):
     order.append(random.sample(words, k=len(words)))

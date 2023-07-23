@@ -41,7 +41,7 @@ with open(filename, "w", newline="") as csvfile:
 syllables = ["di", "da", "du", "pi", "pa", "pu", "bi", "ba", "bu", "ti", "tu", "ta"]
 
 # generate orders
-numstim = 72 # 288/12
+numstim = 48
 anotherorder = []
 
 for i in range(numstim):
