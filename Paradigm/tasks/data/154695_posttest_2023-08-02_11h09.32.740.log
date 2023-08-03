@@ -1,0 +1,19 @@
+1.3409 	WARNING 	We strongly recommend you activate the PTB sound engine in PsychoPy prefs as the preferred audio engine. Its timing is vastly superior. Your prefs are currently set to use ['sounddevice', 'PTB', 'pyo', 'pygame'] (in that order).
+5.8749 	WARNING 	User requested fullscreen with size [1024  768], but screen is actually [1440, 900]. Using actual size
+6.6466 	EXP 	Created window1 = Window(allowGUI=True, allowStencil=False, autoLog=True, backendConf=UNKNOWN, bitsMode=UNKNOWN, blendMode='avg', bpc=(8, 8, 8), color=array([0, 0, 0]), colorSpace='rgb', depthBits=8, fullscr=<method-wrapper '__getattribute__' of attributeSetter object at 0x7fa74cca6670>, gamma=None, gammaErrorPolicy='raise', lms=UNKNOWN, monitor=<psychopy.monitors.calibTools.Monitor object at 0x7fa76e5702b0>, multiSample=False, name='window1', numSamples=2, pos=[360.0, 225.0], screen=0, size=array([2880, 1800]), stencilBits=0, stereo=False, units='height', useFBO=True, useRetina=True, viewOri=0.0, viewPos=None, viewScale=None, waitBlanking=True, winType='pyglet')
+6.6469 	EXP 	window1: mouseVisible = True
+6.6483 	EXP 	window1: mouseVisible = False
+6.6483 	EXP 	window1: Attempting to measure frame rate of screen (0) ...
+6.6484 	EXP 	window1: recordFrameIntervals = False
+6.8095 	EXP 	window1: recordFrameIntervals = True
+6.9946 	EXP 	Screen (0) actual frame rate measured at 59.85Hz
+6.9946 	EXP 	window1: recordFrameIntervals = False
+9.2832 	EXP 	Created left = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1, 1, 1]), colorSpace='rgb', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, image='symbol.png', interpolate=True, mask=None, maskParams=None, name='left', opacity=1.0, ori=0.0, pos=array([-0.5,  0. ]), size=array([0.5, 0.5]), texRes=128.0, units='height', win=Window(...))
+9.4468 	EXP 	Created right = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1, 1, 1]), colorSpace='rgb', contrast=1.0, depth=-1.0, flipHoriz=False, flipVert=False, image='symbol.png', interpolate=True, mask=None, maskParams=None, name='right', opacity=1.0, ori=0.0, pos=array([0.5, 0. ]), size=array([0.5, 0.5]), texRes=128.0, units='height', win=Window(...))
+9.4596 	EXP 	left: autoDraw = True
+9.4596 	EXP 	right: autoDraw = True
+10.4603 	EXP 	left: autoDraw = False
+10.4603 	EXP 	right: autoDraw = False
+10.4603 	EXP 	left: autoDraw = False
+10.4603 	EXP 	right: autoDraw = False
+10.4973 	EXP 	window1: mouseVisible = True

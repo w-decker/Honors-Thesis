@@ -1,0 +1,70 @@
+0.8732 	WARNING 	We strongly recommend you activate the PTB sound engine in PsychoPy prefs as the preferred audio engine. Its timing is vastly superior. Your prefs are currently set to use ['sounddevice', 'PTB', 'pyo', 'pygame'] (in that order).
+4.6122 	WARNING 	User requested fullscreen with size [1024  768], but screen is actually [1440, 900]. Using actual size
+5.4379 	EXP 	Created window1 = Window(allowGUI=True, allowStencil=False, autoLog=True, backendConf=UNKNOWN, bitsMode=UNKNOWN, blendMode='avg', bpc=(8, 8, 8), color=array([0, 0, 0]), colorSpace='rgb', depthBits=8, fullscr=<method-wrapper '__getattribute__' of attributeSetter object at 0x7fd878bc65e0>, gamma=None, gammaErrorPolicy='raise', lms=UNKNOWN, monitor=<psychopy.monitors.calibTools.Monitor object at 0x7fd82ddb83d0>, multiSample=False, name='window1', numSamples=2, pos=[360.0, 225.0], screen=0, size=array([2880, 1800]), stencilBits=0, stereo=False, units='height', useFBO=True, useRetina=True, viewOri=0.0, viewPos=None, viewScale=None, waitBlanking=True, winType='pyglet')
+5.4382 	EXP 	window1: mouseVisible = True
+5.4391 	EXP 	window1: mouseVisible = False
+5.4391 	EXP 	window1: Attempting to measure frame rate of screen (0) ...
+5.4392 	EXP 	window1: recordFrameIntervals = False
+5.6046 	EXP 	window1: recordFrameIntervals = True
+5.7885 	EXP 	Screen (0) actual frame rate measured at 60.06Hz
+5.7886 	EXP 	window1: recordFrameIntervals = False
+7.4682 	EXP 	Created instructions_text_1 = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1, 1, 1]), colorSpace='rgb', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='instructions_text_1', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1)
+7.4800 	EXP 	Created instructions_text_2 = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1, 1, 1]), colorSpace='rgb', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='instructions_text_2', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1)
+7.6810 	EXP 	Created left_sound_symbol_2 = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1, 1, 1]), colorSpace='rgb', contrast=1.0, depth=-1.0, flipHoriz=False, flipVert=False, image='left_symbol.png', interpolate=True, mask=None, maskParams=None, name='left_sound_symbol_2', opacity=1.0, ori=0.0, pos=array([-0.5,  0. ]), size=array([0.5, 0.5]), texRes=128.0, units='height', win=Window(...))
+7.8437 	EXP 	Created right_sound_symbol_2 = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1, 1, 1]), colorSpace='rgb', contrast=1.0, depth=-2.0, flipHoriz=False, flipVert=False, image='right_symbol.png', interpolate=True, mask=None, maskParams=None, name='right_sound_symbol_2', opacity=1.0, ori=0.0, pos=array([0.5, 0. ]), size=array([0.5, 0.5]), texRes=128.0, units='height', win=Window(...))
+7.8470 	EXP 	Created get_ready_text = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1, 1, 1]), colorSpace='rgb', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='get_ready_text', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1)
+8.0083 	EXP 	Created left_sound_symbol = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1, 1, 1]), colorSpace='rgb', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, image='left_symbol.png', interpolate=True, mask=None, maskParams=None, name='left_sound_symbol', opacity=1.0, ori=0.0, pos=array([-0.5,  0. ]), size=array([0.5, 0.5]), texRes=128.0, units='height', win=Window(...))
+8.0758 	EXP 	Sound left_sound set volume 1.000
+8.2463 	EXP 	Created right_sound_symbol = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1, 1, 1]), colorSpace='rgb', contrast=1.0, depth=-2.0, flipHoriz=False, flipVert=False, image='right_symbol.png', interpolate=True, mask=None, maskParams=None, name='right_sound_symbol', opacity=1.0, ori=0.0, pos=array([0.5, 0. ]), size=array([0.5, 0.5]), texRes=128.0, units='height', win=Window(...))
+8.2464 	EXP 	Sound right_sound set volume 1.000
+8.2530 	EXP 	Created polygon = ShapeStim(__class__=<class 'psychopy.visual.shape.ShapeStim'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=0.0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([1, 1, 1]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=1.0, name='polygon', opacity=1.0, ori=0.0, pos=array([0., 0.]), size=array([0.5, 0.5]), units='height', vertices=ndarray(...), win=Window(...), windingRule=None)
+8.2586 	EXP 	Created question = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1, 1, 1]), colorSpace='rgb', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='question', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1)
+8.4279 	EXP 	Created left_answer = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1, 1, 1]), colorSpace='rgb', contrast=1.0, depth=-1.0, flipHoriz=False, flipVert=False, image='left_symbol.png', interpolate=True, mask=None, maskParams=None, name='left_answer', opacity=1.0, ori=0.0, pos=array([-0.5, -0.3]), size=array([0.2, 0.2]), texRes=128.0, units='height', win=Window(...))
+8.5975 	EXP 	Created right_answer = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1, 1, 1]), colorSpace='rgb', contrast=1.0, depth=-2.0, flipHoriz=False, flipVert=False, image='right_symbol.png', interpolate=True, mask=None, maskParams=None, name='right_answer', opacity=1.0, ori=0.0, pos=array([ 0.5, -0.3]), size=array([0.2, 0.2]), texRes=128.0, units='height', win=Window(...))
+8.6096 	EXP 	instructions_text_1: autoDraw = True
+10.2229 	DATA 	Keypress: space
+10.2310 	EXP 	instructions_text_1: autoDraw = False
+10.2310 	EXP 	instructions_text_2: autoDraw = True
+10.2310 	EXP 	left_sound_symbol_2: autoDraw = True
+10.2310 	EXP 	right_sound_symbol_2: autoDraw = True
+11.3377 	DATA 	Keypress: space
+11.3416 	EXP 	instructions_text_2: autoDraw = False
+11.3416 	EXP 	left_sound_symbol_2: autoDraw = False
+11.3416 	EXP 	right_sound_symbol_2: autoDraw = False
+11.3416 	EXP 	get_ready_text: autoDraw = True
+12.3117 	EXP 	Imported trials.csv as conditions, 4 conditions, 3 params
+12.3131 	EXP 	Created sequence: sequential, trialTypes=4, nReps=1, seed=None
+12.3135 	EXP 	New trial (rep=0, index=0): OrderedDict([('r_sound', 'pi_tu_bi.wav'), ('l_sound', 'tu_bi_pi.wav'), ('correct', 'z')])
+12.3221 	DATA 	Keypress: space
+12.3271 	EXP 	get_ready_text: autoDraw = False
+12.3271 	EXP 	left_sound_symbol: autoDraw = True
+13.8377 	EXP 	left_sound_symbol: autoDraw = False
+14.2879 	EXP 	right_sound_symbol: autoDraw = True
+15.7877 	EXP 	right_sound_symbol: autoDraw = False
+15.7877 	EXP 	left_sound_symbol: autoDraw = False
+15.7877 	EXP 	right_sound_symbol: autoDraw = False
+15.7877 	EXP 	polygon: autoDraw = True
+16.7878 	EXP 	polygon: autoDraw = False
+16.7878 	EXP 	polygon: autoDraw = False
+16.8043 	EXP 	question: autoDraw = True
+16.8043 	EXP 	left_answer: autoDraw = True
+16.8043 	EXP 	right_answer: autoDraw = True
+20.0054 	EXP 	New trial (rep=0, index=1): OrderedDict([('r_sound', 'pa_bu_da.wav'), ('l_sound', 'bu_pa_da.wav'), ('correct', 'm')])
+20.0116 	DATA 	Keypress: z
+20.0206 	EXP 	question: autoDraw = False
+20.0206 	EXP 	left_answer: autoDraw = False
+20.0206 	EXP 	right_answer: autoDraw = False
+20.0206 	EXP 	left_sound_symbol: autoDraw = True
+21.5209 	EXP 	left_sound_symbol: autoDraw = False
+22.0050 	EXP 	right_sound_symbol: autoDraw = True
+23.5040 	EXP 	right_sound_symbol: autoDraw = False
+23.5040 	EXP 	left_sound_symbol: autoDraw = False
+23.5040 	EXP 	right_sound_symbol: autoDraw = False
+23.5040 	EXP 	polygon: autoDraw = True
+24.5047 	EXP 	polygon: autoDraw = False
+24.5047 	EXP 	polygon: autoDraw = False
+24.5047 	EXP 	question: autoDraw = True
+24.5047 	EXP 	left_answer: autoDraw = True
+24.5047 	EXP 	right_answer: autoDraw = True
+28.4775 	DATA 	Keypress: escape
+29.0177 	EXP 	window1: mouseVisible = True
