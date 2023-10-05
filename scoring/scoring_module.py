@@ -15,7 +15,7 @@ class FindFiles:
         Absolute path to the folder which holds data files.
         Must be in .csv format
     """
-    def __init__(self, path=os.listdir(os.abspath(__name__))):
+    def __init__(self, path=os.path.dirname(os.path.abspath(__name__))):
         self.path = path
         self.files = os.listdir(self.path)
 
@@ -28,9 +28,15 @@ class FindFiles:
             List of subject IDs that match the filenames. 
             Example: subids = ['sub-001', 'sub-002', 'sub-003']
         """
-        
+        x = []
+        for i in range(len(self.files)):
+            filename = self.files[i].split('/')[-1]
+            filename2 = filename.split('/')[0]
+            if subids[i] == filename2[i]:
+                x.append(self.path + filename)
+            else:
+                print('Subject ID did not match any found files.')
 
-class FilesLoop:
 
 def clean_3afc(d):
     """Remove erroneous columns from .csv file generated from PsychoPy
