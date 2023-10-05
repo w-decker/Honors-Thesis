@@ -15,6 +15,7 @@ class FindFiles:
         Absolute path to the folder which holds data files.
         Must be in .csv format
     """
+
     def __init__(self, path=os.path.dirname(os.path.abspath(__name__))):
         self.path = path
         self.files = os.listdir(self.path)
@@ -28,6 +29,7 @@ class FindFiles:
             List of subject IDs that match the filenames. 
             Example: subids = ['sub-001', 'sub-002', 'sub-003']
         """
+        
         files = []
         for id in subids:
             found= False
