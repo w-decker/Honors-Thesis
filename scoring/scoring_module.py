@@ -4,14 +4,14 @@
 import pandas as pd
 import numpy as np
 import os 
+from scipy.stats import ttest_1samp
 
 def clean_3afc(d):
-    """
-    Remove erroneous columns from .csv file generated from PsychoPy
+    """Remove erroneous columns from .csv file generated from PsychoPy
 
     Parameters
     ----------
-    d : str 
+    d: str 
         absolute path to csv file generated from 3afc post-test
     """
     # read in the datafile
@@ -99,12 +99,11 @@ def clean_3afc(d):
     return order, df, subid
 
 def create_anskey(order):
-    """
-    Create answer key data frame
+    """Create answer key data frame
 
     Parameters
     ----------
-    order : int
+    order: int
         1 or 2. This is also calculated and returned in clean_3afc() 
     """
 
@@ -124,8 +123,7 @@ def create_anskey(order):
     return anskey
 
 def merge_participant_data(df, anskey):
-    """
-    Combine scores from individual participants to the answer key
+    """Combine scores from individual participants to the answer key
 
     Parameters
     ----------
@@ -140,8 +138,7 @@ def merge_participant_data(df, anskey):
     return anskey
 
 def score(anskey):
-    """
-    Scoring individual participant data
+    """Scoring individual participant data
 
     Parameters
     ----------
@@ -196,8 +193,31 @@ def manage_scores(score, participant_database, subid):
     # assign score to participant database in correct column and row
     pdb['score'][idx] = score
 
-    # write participant database back out
-    pdb.to_excel(participant_database)
+    pdb_scores = pdb['score']
 
+    return pdb_scores
+
+def score_stats(pdb_scores, mu=(1/3)):
+    """Compute a 1 sample, 1 tailed t-test
     
+    Parameters
+    ----------
+    pdb_scores: pandas.DataFrame()
+        Data frame of participant scores RETURNED by manage_scores()
+
+    mu: int, default: (1/3)
+        Population mean that you are testing against
+
+    """
+    
+    # get scores
+    pdb_scores = pdb_scores
+
+    # convert to array like
+    a = list(pdb_scores)
+
+    # compute test
+    m = ttest_1samp(a, popmean=mu, alternative='greater')
+
+    return m
 
