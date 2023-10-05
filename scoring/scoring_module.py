@@ -15,7 +15,8 @@ class FindFiles:
         Absolute path to the folder which holds data files.
         Must be in .csv format
     """
-    def __init__(self, path=os.listdir(os.abspath(__name__))):
+
+    def __init__(self, path=os.path.dirname(os.path.abspath(__name__))):
         self.path = path
         self.files = os.listdir(self.path)
 
@@ -29,9 +30,20 @@ class FindFiles:
             Example: subids = ['sub-001', 'sub-002', 'sub-003']
         """
         
+        files = []
+        for id in subids:
+            found= False
+            for filename in self.files:
+                filename2 = filename.split('_')[0]
+                if id == filename2 and filename.endswith('.csv'):
+                    files.append(os.path.join(self.path, filename))
+                    found = True
+                    break
+                if not found:
+                    print('Getting more files')
         
-
-class FilesLoop:
+        # return
+        self.files = files
 
 def clean_3afc(d):
     """Remove erroneous columns from .csv file generated from PsychoPy
@@ -224,7 +236,7 @@ def manage_scores(score, participant_database, subid):
 
     return pdb_scores
 
-def score_stats(pdb_scores, mu=(1/3)):
+def score_stats(scores, mu=(1/3)):
     """Compute a 1 sample, 1 tailed t-test
     
     Parameters
@@ -238,13 +250,10 @@ def score_stats(pdb_scores, mu=(1/3)):
     """
     
     # get scores
-    pdb_scores = pdb_scores
-
-    # convert to array like
-    a = list(pdb_scores)
+    scores = scores
 
     # compute test
-    m = ttest_1samp(a, popmean=mu, alternative='greater')
+    m = ttest_1samp(scores, popmean=mu, alternative='greater')
 
     return m
 
