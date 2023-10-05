@@ -2,7 +2,6 @@
 
 # imports for this module
 import pandas as pd
-import numpy as np
 import os 
 from scipy.stats import ttest_1samp
 
@@ -20,7 +19,7 @@ class FindFiles:
         self.path = path
         self.files = os.listdir(self.path)
 
-    def parse_file(self, subids):
+    def parse_files(self, subids):
         """Find all of the files you wish to score
         
         Parameters
@@ -44,6 +43,36 @@ class FindFiles:
         
         # return
         self.files = files
+        self.numfiles = len(files)
+
+    def rm_subs(self, subids):
+        """Remove subjects' files from object
+
+        Parameters
+        ----------
+        subids: list
+             List of subject IDs that match the filenames. 
+        """
+
+        # bring in current files
+        files = self.files
+
+        # get sub ids
+        subids = subids
+
+        # remove requested files
+        _2rm = []
+        for file in files:
+            for id in subids:
+                if file.split('/')[-1].split('_')[0] == id:
+                    _2rm.append(file)
+
+        [files.remove(i) for i in _2rm]
+
+        # return new
+        self.files = files
+        self.numfiles = len(files)
+
 
 def clean_3afc(d):
     """Remove erroneous columns from .csv file generated from PsychoPy
@@ -201,9 +230,8 @@ def score(anskey):
     return anskey, score
 
 def manage_scores(score, participant_database, subid):
-    """
-    Integrate scores with participant database for future statistical analysis.
-    There must be a subject ID column and a scores column.
+    """Integrate scores with participant database for future statistical analysis.
+    There must be a subject ID column.
 
     NOTE: You must have "openpyxl" installed.
 
