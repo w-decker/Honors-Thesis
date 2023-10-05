@@ -6,3 +6,4 @@ This repository contains all code used in Will Decker's undergraduate honors the
 | ------ | ----------- |
 | Transition Probability Matrix | Generates TPM and an emperical TPM from some generated order. Helps me get a better (albeit introductory) understanding of Markovian mathematics used in neuroscience)
 | Paradigm | Code used to generate the experimental paradigm. |
+| scoring | Code used to score participant behavioral data |
