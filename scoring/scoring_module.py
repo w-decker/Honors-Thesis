@@ -6,6 +6,32 @@ import numpy as np
 import os 
 from scipy.stats import ttest_1samp
 
+class FindFiles:
+    """Class for getting all the files you wish to analyze and putting them in a single object
+    
+    Parameters
+    ----------
+    path: str, default: current path
+        Absolute path to the folder which holds data files.
+        Must be in .csv format
+    """
+    def __init__(self, path=os.listdir(os.abspath(__name__))):
+        self.path = path
+        self.files = os.listdir(self.path)
+
+    def parse_file(self, subids):
+        """Find all of the files you wish to score
+        
+        Parameters
+        ----------
+        subids: list
+            List of subject IDs that match the filenames. 
+            Example: subids = ['sub-001', 'sub-002', 'sub-003']
+        """
+        
+
+class FilesLoop:
+
 def clean_3afc(d):
     """Remove erroneous columns from .csv file generated from PsychoPy
 
