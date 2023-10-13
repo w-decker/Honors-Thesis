@@ -282,9 +282,9 @@ class Stats(Data):
             Population parameter you wish to test agains. Only necessary if test = 1samp
         '''
                 
-        if test == 1 or test.lower() == '1samp':
-            self.test = '1samp'
-        elif test == 2 or test.lower()=='ind':
+        if test == 1 or test == '1samp':
+            self.test = '1samp'    
+        elif test == 2 or test =='ind':
             self.test = 'ind'
 
         self.mu = kwargs.get('mu')
