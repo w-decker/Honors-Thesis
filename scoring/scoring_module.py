@@ -1,11 +1,11 @@
-#!/usr/bin env python
+#!/usr/bin/env python
 
 # imports for this module
 import pandas as pd
 import os 
 from scipy.stats import ttest_1samp
 
-class FindFiles:
+class Data(object):
     """Class for getting all the files you wish to analyze and putting them in a single object
     
     Parameters
@@ -24,7 +24,7 @@ class FindFiles:
         
         Parameters
         ----------
-        subids: list
+        subids: list, str
             List of subject IDs that match the filenames. 
             Example: subids = ['sub-001', 'sub-002', 'sub-003']
         """
@@ -39,7 +39,7 @@ class FindFiles:
                     found = True
                     break
                 if not found:
-                    print('Getting more files')
+                    print('Looking for more files')
         
         # return
         self.files = files
@@ -74,119 +74,114 @@ class FindFiles:
         self.numfiles = len(files)
 
 
-def clean_3afc(d):
-    """Remove erroneous columns from .csv file generated from PsychoPy
+    def clean_3afc(self):
+        """Remove erroneous columns from .csv file generated from PsychoPy"""
 
-    Parameters
-    ----------
-    d: str 
-        absolute path to csv file generated from 3afc post-test
-    """
-    # read in the datafile
-    df = pd.read_csv(d)
+        # remove unnecessary columns 
+        label = ['example_outer_loop.thisRepN',
+        'example_outer_loop.thisTrialN',
+        'example_outer_loop.thisN',
+        'example_outer_loop.thisIndex',
+        'example_inner_loop.thisRepN',
+        'example_inner_loop.thisTrialN',
+        'example_inner_loop.thisN',
+        'example_inner_loop.thisIndex',
+        'example_shift_loop.thisRepN',
+        'example_shift_loop.thisTrialN',
+        'example_shift_loop.thisN',
+        'example_shift_loop.thisIndex',
+        'trials_loop.thisRepN',
+        'trials_loop.thisTrialN',
+        'trials_loop.thisN',
+        'trials_loop.thisIndex',
+        'transition_loop.thisRepN',
+        'transition_loop.thisTrialN',
+        'transition_loop.thisN',
+        'transition_loop.thisIndex',
+        'blocks_loop.thisRepN',
+        'blocks_loop.thisTrialN',
+        'blocks_loop.thisN',
+        'blocks_loop.thisIndex',
+        'word_loop.thisRepN',
+        'word_loop.thisTrialN',
+        'word_loop.thisN',
+        'word_loop.thisIndex',
+        'replay_msg_loop.thisRepN',
+        'replay_msg_loop.thisTrialN',
+        'replay_msg_loop.thisN',
+        'replay_msg_loop.thisIndex',
+        'instructions1_key.keys',
+        'instructions1_key.rt',
+        'instructions2_key.keys',
+        'instructions2_key.rt',
+        'instructions3_key.keys',
+        'instructions3_key.rt',
+        'instructions4_key.keys',
+        'instructions4_key.rt',
+        'shift1.started',
+        'shift1.stopped',
+        'shift2_2.started',
+        'shift2_2.stopped',
+        'instructions5_key.keys',
+        'instructions5_key.rt',
+        'word_sound.started',
+        'word1_shape.started',
+        'word_sound.stopped',
+        'word1_shape.stopped',
+        'jitter_shape.started',
+        'jitter_shape.stopped',
+        # 'shift2_shape.started',
+        # 'shift2_shape.stopped',
+        'replay_msg_text.started',
+        'response_text.started',
+        'key_resp.started',
+        'replay_msg_text.stopped',
+        'participant',
+        'order',
+        'date',
+        'expName',
+        'psychopyVersion',
+        'frameRate']
 
-    # determine which order
-    order = []
-    if df['blocks'][5] == 'block1.csv':
-        order = 1
-    elif df['blocks'][5] == 'block12.csv':
-        order =2
+        # read in the datafile
+        for i in self.files:
+            df = pd.read_csv(i)
+            try:
+                df = df.drop(columns=label)
+                df.to_csv(i)
+            except:
+                KeyError
 
-    # get subject ID
-    fn = d.split('/')[-1] # filename
-    subid = fn.split('_')[0] #subject ID
+        return self
 
-    # remove unnecessary columns 
-    label = ['example_outer_loop.thisRepN',
-    'example_outer_loop.thisTrialN',
-    'example_outer_loop.thisN',
-    'example_outer_loop.thisIndex',
-    'example_inner_loop.thisRepN',
-    'example_inner_loop.thisTrialN',
-    'example_inner_loop.thisN',
-    'example_inner_loop.thisIndex',
-    'example_shift_loop.thisRepN',
-    'example_shift_loop.thisTrialN',
-    'example_shift_loop.thisN',
-    'example_shift_loop.thisIndex',
-    'trials_loop.thisRepN',
-    'trials_loop.thisTrialN',
-    'trials_loop.thisN',
-    'trials_loop.thisIndex',
-    'transition_loop.thisRepN',
-    'transition_loop.thisTrialN',
-    'transition_loop.thisN',
-    'transition_loop.thisIndex',
-    'blocks_loop.thisRepN',
-    'blocks_loop.thisTrialN',
-    'blocks_loop.thisN',
-    'blocks_loop.thisIndex',
-    'word_loop.thisRepN',
-    'word_loop.thisTrialN',
-    'word_loop.thisN',
-    'word_loop.thisIndex',
-    'replay_msg_loop.thisRepN',
-    'replay_msg_loop.thisTrialN',
-    'replay_msg_loop.thisN',
-    'replay_msg_loop.thisIndex',
-    'instructions1_key.keys',
-    'instructions1_key.rt',
-    'instructions2_key.keys',
-    'instructions2_key.rt',
-    'instructions3_key.keys',
-    'instructions3_key.rt',
-    'instructions4_key.keys',
-    'instructions4_key.rt',
-    'shift1.started',
-    'shift1.stopped',
-    'shift2_2.started',
-    'shift2_2.stopped',
-    'instructions5_key.keys',
-    'instructions5_key.rt',
-    'word_sound.started',
-    'word1_shape.started',
-    'word_sound.stopped',
-    'word1_shape.stopped',
-    'jitter_shape.started',
-    'jitter_shape.stopped',
-    # 'shift2_shape.started',
-    # 'shift2_shape.stopped',
-    'replay_msg_text.started',
-    'response_text.started',
-    'key_resp.started',
-    'replay_msg_text.stopped',
-    'participant',
-    'order',
-    'date',
-    'expName',
-    'psychopyVersion',
-    'frameRate']
+    def score(self):
+        """Scoring individual participant data"""
 
-    df = df.drop(columns=label)
+        # create empty df for scoring
+        anskey = pd.DataFrame(columns=['correct_key_resp', 'actual_key_resp', 'assign_codes', 'score'])
 
-    return order, df, subid
+        str_scores = []
+        rand_scores = []
 
-def create_anskey(order):
-    """Create answer key data frame
+        for i in self.files:
 
-    Parameters
-    ----------
-    order: int
-        1 or 2. This is also calculated and returned in clean_3afc() 
-    """
+            # read in the file
+            df = pd.read_csv(i)
 
-    # assign in order
-    order = order
+            order = []
+            if df['blocks'][5] == 'block1.csv':
+                order = 1
+            elif df['blocks'][5] == 'block12.csv':
+                order = 2
 
-    # create empty df for scoring
-    anskey = pd.DataFrame(columns=['correct_key_resp', 'actual_key_resp', 'assign_codes', 'score'])
+            anskey['actual_key_resp'] = list(df['key_resp.keys'][5:29].dropna())
 
-    # set answer key based on order set a few chunks earlier
-    answers =  ['z', 'v', 'v',  'z', 'm', 'z', 'z','v', 'm','v', 'v', 'm']
-    if order == 1:
-        anskey['correct_key_resp'] = answers
-    elif order == 2:
-        anskey['correct_key_resp'] = answers[::-1]
+            # set answer key based on order set a few chunks earlier
+            answers =  ['z', 'v', 'v',  'z', 'm', 'z', 'z','v', 'm','v', 'v', 'm']
+            if order == 1:
+                anskey['correct_key_resp'] = answers
+            elif order == 2:
+                anskey['correct_key_resp'] = answers[::-1]
 
     return anskey
 
@@ -230,8 +225,9 @@ def score(anskey):
     return anskey, score
 
 def manage_scores(score, participant_database, subid):
-    """Integrate scores with participant database for future statistical analysis.
-    There must be a subject ID column.
+    """
+    Integrate scores with participant database for future statistical analysis.
+    There must be a subject ID column and a scores column.
 
     NOTE: You must have "openpyxl" installed.
 
@@ -264,7 +260,7 @@ def manage_scores(score, participant_database, subid):
 
     return pdb_scores
 
-def score_stats(scores, mu=(1/3)):
+def score_stats(pdb_scores, mu=(1/3)):
     """Compute a 1 sample, 1 tailed t-test
     
     Parameters
@@ -278,10 +274,13 @@ def score_stats(scores, mu=(1/3)):
     """
     
     # get scores
-    scores = scores
+    pdb_scores = pdb_scores
+
+    # convert to array like
+    a = list(pdb_scores)
 
     # compute test
-    m = ttest_1samp(scores, popmean=mu, alternative='greater')
+    m = ttest_1samp(a, popmean=mu, alternative='greater')
 
-    return m
-
+        self.statistic=statistic
+        return self
