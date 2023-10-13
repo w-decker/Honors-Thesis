@@ -50,7 +50,7 @@ class Data(object):
 
         Parameters
         ----------
-        subids: list
+        subids: list, str
              List of subject IDs that match the filenames. 
         """
 
@@ -74,7 +74,7 @@ class Data(object):
         self.numfiles = len(files)
 
 
-    def clean_3afc(self):
+    def clean(self):
         """Remove erroneous columns from .csv file generated from PsychoPy"""
 
         # remove unnecessary columns 
@@ -211,7 +211,50 @@ class Data(object):
         self.scores = scores
 
         return self
+    
+    def indiv_score(self, subid):
+        """Get score and individual responses for a single subject
+        
+        Parameters
+        ----------
+        subid: str
+            single subject ID that matches filename
+        """
+        anskey = pd.DataFrame(columns=['correct_key_resp', 'actual_key_resp', 'assign_codes', 'score'])
 
+        file = []
+        for filename in self.files:
+            if filename.split('/')[-1].split('_')[0] == subid:
+                file.append(filename)
+                
+        df = pd.read_csv(file[0])
+
+        order = []
+        if df['blocks'][5] == 'block1.csv':
+            order = 1
+        elif df['blocks'][5] == 'block12.csv':
+            order = 2
+
+        anskey['actual_key_resp'] = list(df['key_resp.keys'][5:29].dropna())
+
+        # set answer key based on order set a few chunks earlier
+        answers =  ['z', 'v', 'v',  'z', 'm', 'z', 'z','v', 'm','v', 'v', 'm']
+        if order == 1:
+            anskey['correct_key_resp'] = answers
+        elif order == 2:
+            anskey['correct_key_resp'] = answers[::-1]
+
+        for j in range(12):
+            if anskey['correct_key_resp'][j] == anskey['actual_key_resp'][j]:
+                anskey['assign_codes'][j] = 1
+            else:
+                anskey['assign_codes'][j] = 0
+        # get score
+        anskey['score'][0] = (sum(anskey['assign_codes']))/12;
+        
+        return anskey
+
+        
 
 class Stats(Data):
     """Class to compute a 1 sample, 1 tailed t-test or two-samples independant, two tailed t-test
