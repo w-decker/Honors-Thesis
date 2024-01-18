@@ -52,15 +52,35 @@
 
 ## 2.3 Headphones
 
-#### During the post-test, it is recommended that participants wear headphones. If you do not have the proper headphones, please contact Will. [See ]
+#### During the post-test, it is recommended that participants wear headphones. If you do not have the proper headphones, please contact Will.
 
 ## 2.4 Keyboard stickers
 
 #### During the post-test participants must select one of three choices, denoted by three different colored squars on the screen. One of these three choices is selected by pressing the corresponding colored key on the keyboard. This requires that stickers be placed on the correct keys. More on this in [Section 5](#5-the-post-test-1). Stickers will be provided by Will. If you need more, please contact Will.
 
-## 2.5 Participant databas
+## 2.5 Participant database
 
-#### Information as to the conditions of a specific participant are located on a shard Box file. This is a dynamic file. If you are running a participant, it will follow a sequention
+#### Information as to the conditions of a specific participant are located on a shard Box file. This is a dynamic file. If you are running a participant, it will follow the previous participant. Below is a model of what this looks like
+
+| **Subject ID** | **DOT**    | **COND** | **ORDER** | **NOTES**        |
+| -------------- | ---------- | -------- | --------- | ---------------- |
+| sub-001        | 11/30/2023 | S        | 2         | N/A              |
+| sub-002        | 12/01/2023 | R        | 2         | No resting state |
+| sub-003        | 12/02/2023 | S        | 1         | N/A              |
+| sub-004        | 12/03/2023 | S        | 1         | N/A              |
+| ...            | ...        | ...      | ...       | ...              |
+| sub-nnn        | MM/DD/YYYY | ...      | ...       | N/A              |
+
+#### Importantly, the condition and order are determined via a column in the database called **Choose**.
+
+| **Choose**  |
+| ----------- |
+| `condition` |
+| `order`     |
+
+#### Except, in the place of `condition` and `order`, are either the values **S** or **R** and **1** or **2** respectively. This column is updated every time the database is opened and it randomly chooses the conditions a participant receives. You will be responsible for copying these values over into the main database table.
+
+#### So, when you are running a participant, you will look at the previous subject ID. Yours is the next one. For example, if the subject ID, sub-004 is already filled in (this means that a participant has been run and there is accompanying data), then you will be running sub-005.
 
 # 3. Your role
 
@@ -74,7 +94,7 @@
 
 # 4. The fMRI scan
 
-#### Ideally, this entire experiment should occur at the _end_ of the current study being conducted. The fMRI scan is acquired using a typicaly resting state protocol. The exposure is executed during the fMRI scan. The acquisition parameters for the scan specifically pertaining to the exposure already exist on the system software at PBRC. The name of the acquisition is GET NAME.
+#### Ideally, this entire experiment (i.e., Will's Honors Thesis) should occur at the _end_ of the current study being conducted. The fMRI scan is acquired using a typicaly resting state protocol. The exposure is executed during the fMRI scan. The acquisition parameters for the scan specifically pertaining to the exposure already exist on the system software at PBRC. The name of the acquisition is GET NAME.
 
 #### To execute the exposure, open the Dell computer in the control room. The paradigm was created with PsychoPy and is located at the following path: GET PATH.
 
@@ -82,9 +102,38 @@
 
 # 5. The post-test
 
+#### The post-test must be executed on a Mac laptop. The code to execute this is located in the shared Box folder.
+
+#### In this post-test, participants completed a three-alternative forced choice task, in which some sound from the scanner (target sound) and two other sounds (foil sounds) are pitted against eachother. There are 12 trials. Each sound (the two foils and one target) are played one after another and the order in which they are presented is counter balanced.
+
 # 6. Data sharing
 
+#### PLEASE ASK THE MRI TECHNICIAN, KEVIN, TO ADD WILL'S EMAIL TO THE DATA SHARING LINK! If possible, please only share the requried data (i.e., the data acquired from GET PROTOCOL NAME).
+
+#### The post-test data must also be shared. It get's outputted to a folder within the same directory in which the post-test was run from. Please upload it to the shared Box folder.
+
 # 7. Flowchart
+
+#### Below is a flow chart explaining the entireity of this experimental workflow.
+
+```mermaid
+flowchart LR
+
+A((Participant
+arrives))-->B((Give them
+consent
+form))-->C((Open
+participant
+database))-->D((Check
+condition
+and
+order))-->E
+
+E((Test))
+
+
+
+```
 
 # 8. Contact
 
