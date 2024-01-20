@@ -5,3 +5,4 @@
 | File                     | Function                                  | Usage                                                                  |
 | ------------------------ | ----------------------------------------- | ---------------------------------------------------------------------- |
 | `make_heuristic_file.sh` | Generates **`heudiconv`** heuristic file. | `sh make_heuristic_file.sh -b /path/to/bids/dir -d /path/to/dicom/dir` |
+| `unzip.sh`               | Unzips `.tgz` files                       | `sh unzip.sh -d $(pwd)`                                                |
