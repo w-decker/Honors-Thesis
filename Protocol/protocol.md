@@ -16,35 +16,33 @@
 
 #### 6. [Data sharing](#6-data-sharing-1)
 
-#### 7. [Flowchart](#7-flowchart-1)
-
-#### 8. [Contact](#8-contact-1)
+#### 7. [Contact](#7-contact-1)
 
 <div style="page-break-after: always; break-after: page;"></div>
 
 # 1. Project Synopsis
 
-#### In this project, we are looking at the dynamic nature of statistical learning (SL), a cognitive mechanism involved in low dimensional perceptual learning. Our environment is complex yet structured.
+#### In this project, we are looking at the dynamic nature of statistical learning (SL), a cognitive mechanism involved in low dimensional perceptual learning.
 
-#### In the case of auditory and linguistic input, the structure of such input is defined by its internal transitional probabilities within and across perceptual units. So, in the case of language, the transitional probabilities within and across words allows the humann (infant) brain to segment input and extract word boundaries.
+#### In the case of auditory and linguistic input, the structure of such input is defined by its internal transitional probabilities within and across perceptual units. So, in the case of language, the transitional probabilities within and across words allows the human (infant) brain to segment input and extract word boundaries.
 
-#### In the literature SL is often unintentionally described as a unitary process. Here, we challenge this notion by proposing a mechanistic neurocognitive model of SL, which we've termed the three-process model of SL (3PSL). We posit that 1.) perception must first take place before 2.) encoding can occur. Once an individual has learned/encoded the strucutre, 3.) prediction can occur given the learned information.
+#### The literature often unintentionally describes SL as a unitary process. Here, we challenge this notion by proposing a mechanistic neurocognitive model of SL, which we've termed the three-process model of SL (3PSL). We posit that 1.) perception must first take place before 2.) encoding can occur. Once an individual has learned/encoded the structure, 3.) prediction can occur given the learned information.
 
 #### We expect to see this theoretical model implicated in the neural activity taking place during SL.
 
-#### Here, we are exposing individuals to either structured or unstructured phonological sequences while lying in the scanner. Then, participants will be tested on whether they learned the structured.
+#### Here, we are exposing individuals to either structured or unstructured phonological sequences while lying in an MRI scanner. Then, participants will be tested on whether they learned the structured by completing a behavioral test outside of the scanner.
 
 # 2. Methods and Materials
 
 ## 2.1 Magnetic Resonance Imaging (MRI) Scanner
 
-#### This particular project makes use of MRI, more specifically, functional MRI (fMRI). FMRI relies on the changes in blood flow as a proxy for neural activity; as neurons fire, blood is carried to neurons to replenish their energy. Importantly, this haemodynamic response has detectable magnetic properties. This is the basis of fMRI. The fMRI scan records changes in blood flow occurs as a consequence of neural activity.
+#### This particular project makes use of MRI, more specifically, functional MRI (fMRI). FMRI relies on the changes in blood flow as a proxy for neural activity; as neurons fire to carry out a cognitive process, blood is carried to neurons to replenish their energy. Importantly, this haemodynamic response has detectable magnetic properties. This is the basis of fMRI. The fMRI scan records changes in blood flow over time.
 
-#### The MRI scanner is located at [Pennington Biomedical Research Center (PBRC)](https://www.pbrc.edu/). Unless you are **Level 2** certified, you will be operating the scanner in a supportive capacity, while the MRI technician, Kevin, takes care of the bulk of the acquisition protocol.
+#### The MRI scanner is located at [Pennington Biomedical Research Center (PBRC)](https://www.pbrc.edu/). Unless you are **Level 2** certified, you will be operating the scanner in a supportive capacity while the MRI technician, Kevin, takes care of the bulk of the acquisition protocol.
 
 ## 2.2 Computer
 
-#### There are two paradigms which are executed in this experiment: 1.) the exposure and 2.) the test. These are done of two _separate_ computers.
+#### There are two paradigms which are executed in this experiment: 1.) the exposure and 2.) the test. These are done on two _separate_ computers.
 
 #### The exposure is executed from the Dell computer located in the control room during the fMRI scan. More on this in [Section 3](#4-the-fmri-scan-1).
 
@@ -98,13 +96,33 @@
 
 #### To execute the exposure, open the Dell computer in the control room. The paradigm was created with PsychoPy and is located at the following path: GET PATH.
 
-#### You will then be prompted with two pop up
+#### You will then be prompted with two pop up windows. The first is where you set the condition and order. The second is where you will type the subject ID. Please make sure you are familiar with opening PsychoPy files/experiments in the GUI before starting.
 
 # 5. The post-test
 
-#### The post-test must be executed on a Mac laptop. The code to execute this is located in the shared Box folder.
+#### The post-test must be executed on a Mac laptop outside of the scanner. Thus far, participants have completed this task in the control room. The code/files to execute this are located in the shared Box folder.
 
-#### In this post-test, participants completed a three-alternative forced choice task, in which some sound from the scanner (target sound) and two other sounds (foil sounds) are pitted against eachother. There are 12 trials. Each sound (the two foils and one target) are played one after another and the order in which they are presented is counter balanced.
+#### You will execute the paradigm exactly the same as you did while the participant was in the scanner, except they will be in the control room and on a Mac laptop. You will then be prompted with two pop up windows. The first is where you set the condition and order. The second is where you will type the subject ID. Please make sure you are familiar with opening PsychoPy files/experiments in the GUI before starting.
+
+#### In this post-test, participants completed a three-alternative forced choice task, in which some sound from the scanner (target sound) and two other sounds (foil sounds) are pitted against eachother. There are 12 trials. Each sound (the two foils and one target) are played one after another and the order in which they are presented is counter balanced and determined by the input you provide to the two pop up windows.
+
+#### This post-test makes use of a color coded schema. Therefore, you must place colored stickers on your keyboard. Below is the code for which colored stickers must be placed on which keys.
+
+```mermaid
+---
+title: Keys and Colors
+---
+flowchart LR
+
+Z((Z)) ~~~ V((V)) ~~~ M((M))
+
+style Z fill:#f00
+style V fill:#229
+style M fill:#280
+
+```
+
+#### So, a red sticker must be placed on the `z` key. A blue sticker must be placed on the `v` key and a green sticker must be placed on the `m` key.
 
 # 6. Data sharing
 
@@ -112,30 +130,7 @@
 
 #### The post-test data must also be shared. It get's outputted to a folder within the same directory in which the post-test was run from. Please upload it to the shared Box folder.
 
-# 7. Flowchart
-
-#### Below is a flow chart explaining the entireity of this experimental workflow.
-
-```mermaid
-flowchart LR
-
-A((Participant
-arrives))-->B((Give them
-consent
-form))-->C((Open
-participant
-database))-->D((Check
-condition
-and
-order))-->E
-
-E((Test))
-
-
-
-```
-
-# 8. Contact
+# 7. Contact
 
 #### All initial inquiries should be made to Will. Please contact the other individuals on an as needed basis.
 
