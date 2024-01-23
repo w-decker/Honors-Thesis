@@ -6,6 +6,8 @@ This repository contains all code used in Will Decker's undergraduate honors the
 | ------ | ----------- |
 | Transition Probability Matrix | Generates TPM and an emperical TPM from some generated order. |
 | scoring | Code used to score participant behavioral data. Makes use of custom built module. |
+| BIDS | Converting DICOM to NIFTIs in BIDS format |
+| Protocol | Experimental execution details |
 
 Other repos involved in this project...
 | Repo | Description |
