@@ -56,9 +56,11 @@
 
 #### During the post-test participants must select one of three choices, denoted by three different colored squars on the screen. One of these three choices is selected by pressing the corresponding colored key on the keyboard. This requires that stickers be placed on the correct keys. More on this in [Section 5](#5-the-post-test-1). Stickers will be provided by Will. If you need more, please contact Will.
 
-## 2.5 Participant database
+## 2.5 Box folder
 
-#### Information as to the conditions of a specific participant are located on a shard Box file. This is a dynamic file. If you are running a participant, it will follow the previous participant. Below is a model of what this looks like
+#### Information as to the conditions of a specific participant, some paradigm files and more are located on a shard Box folder. The box folder is named PBRC. If you do not have access to it, please contact Will.
+
+#### Below is where you will find details specific to the participant databas. This is a dynamic file. If you are running a participant, it will follow the previous participant. Below is a model of what this looks like
 
 | **Subject ID** | **DOT**    | **COND** | **ORDER** | **NOTES**        |
 | -------------- | ---------- | -------- | --------- | ---------------- |
@@ -80,6 +82,8 @@
 
 #### So, when you are running a participant, you will look at the previous subject ID. Yours is the next one. For example, if the subject ID, sub-004 is already filled in (this means that a participant has been run and there is accompanying data), then you will be running sub-005.
 
+#### There is also a sheet titled `demographics`. There you will input the necessary data denoted by the column names.
+
 # 3. Your role
 
 #### Your role in this experiment is to oversee the execution of the experimental paradigms.
@@ -96,15 +100,17 @@
 
 #### To execute the exposure, open the Dell computer in the control room. The paradigm was created with PsychoPy and is located at the following path: GET PATH.
 
-#### You will then be prompted with two pop up windows. The first is where you set the condition and order. The second is where you will type the subject ID. Please make sure you are familiar with opening PsychoPy files/experiments in the GUI before starting.
+#### Please familiarize yourself with executing PsychoPy files within the experiment builder. This is how the exposure is launched.
+
+#### Once you launch the exposure, you will be prompted with two pop up windows. The first is where you set the condition and order. The second is where you will type the subject ID.
 
 # 5. The post-test
 
-#### The post-test must be executed on a Mac laptop outside of the scanner. Thus far, participants have completed this task in the control room. The code/files to execute this are located in the shared Box folder.
+#### The post-test must be executed on a Mac laptop outside of the scanner. Participants will complete this task in the control room. The code/files to execute this are located in the shared Box folder, PBRC.
 
-#### You will execute the paradigm exactly the same as you did while the participant was in the scanner, except they will be in the control room and on a Mac laptop. You will then be prompted with two pop up windows. The first is where you set the condition and order. The second is where you will type the subject ID. Please make sure you are familiar with opening PsychoPy files/experiments in the GUI before starting.
+#### You will execute the paradigm exactly the same as you did while the participant was in the scanner, except they will be in the control room and on a Mac laptop. You will then be prompted with two pop up windows. The first is where you set the condition and order. The second is where you will type the subject ID. Please make sure you are familiar with opening PsychoPy files/experiments in the experiment builder before starting.
 
-#### In this post-test, participants completed a three-alternative forced choice task, in which some sound from the scanner (target sound) and two other sounds (foil sounds) are pitted against eachother. There are 12 trials. Each sound (the two foils and one target) are played one after another and the order in which they are presented is counter balanced and determined by the input you provide to the two pop up windows.
+#### In this post-test, participants complete a three-alternative forced choice task, in which some sounds from the scanner (target sound) and two other sounds (foil sounds) are pitted against eachother. There are 12 trials in total. Each sound (the two foils and one target) are played one after another and the order in which they are presented is counter balanced and determined by the input you provide to the two pop up windows.
 
 #### This post-test makes use of a color coded schema. Therefore, you must place colored stickers on your keyboard. Below is the code for which colored stickers must be placed on which keys.
 
