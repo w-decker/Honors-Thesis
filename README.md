@@ -15,7 +15,6 @@ Other repos involved in this project...
 | [manip_sound_files](https://github.com/w-decker/manip_sound_files) | Code used to manipulate and modify and get information from .wav files |
 | [statistical_learning_sequencing](https://github.com/w-decker/statistical_learning_sequencing) | Code used to generate sequences for stimuli presentation. Makes use of custom built module and algorithm written by [Harrison Gietz](https://github.com/hubarruby). |
 | [average_sliding_window](https://github.com/w-decker/average_sliding_window) | Code for fMRI analysis of dynamic functional connectivity. |
-| [spm-scripts](https://github.com/w-decker/spm-scripts) | Code for preprocessing raw fMRI data |
 
 
 
