@@ -17,61 +17,35 @@ class Data(object):
 
     def __init__(self, path=os.path.dirname(os.path.abspath(__name__))):
         self.path = path
-        self.files = os.listdir(self.path)
+        self.files = pd.DataFrame(data=os.listdir(self.path), columns=["files"])
 
-    def parse_files(self, subids):
+    def parse_files(self):
         """Find all of the files you wish to score
         
         Parameters
         ----------
-        subids: list, str
-            List of subject IDs that match the filenames. 
-            Example: subids = ['sub-001', 'sub-002', 'sub-003']
         """
-        
-        files = []
-        for id in subids:
-            found= False
-            for filename in self.files:
-                filename2 = filename.split('_')[0]
-                if id == filename2 and filename.endswith('.csv'):
-                    files.append(os.path.join(self.path, filename))
-                    found = True
-                    break
-                if not found:
-                    print('Looking for more files')
+
+        self.files = self.files[self.files["files"].str.endswith('csv')]
         
         # return
-        self.files = files
-        self.numfiles = len(files)
+        self.numfiles = len(self.files)
 
-    def rm_subs(self, subids):
+        return self
+
+    def rm_subs(self, subids: tuple):
         """Remove subjects' files from object
 
         Parameters
         ----------
-        subids: list, str
-             List of subject IDs that match the filenames. 
+        subids: tuple
+             Tuple of subject IDs that match the filenames. 
         """
 
-        # bring in current files
-        files = self.files
+        self.files = self.files.drop(self.files[self.files["files"].str.startswith(subids)].index)
+        self.numfiles = len(self.files)
 
-        # get sub ids
-        subids = subids
-
-        # remove requested files
-        _2rm = []
-        for file in files:
-            for id in subids:
-                if file.split('/')[-1].split('_')[0] == id:
-                    _2rm.append(file)
-
-        [files.remove(i) for i in _2rm]
-
-        # return new
-        self.files = files
-        self.numfiles = len(files)
+        return self
 
 
     def clean(self):
