@@ -4,7 +4,10 @@
 import pandas as pd
 import os 
 from scipy.stats import ttest_1samp, ttest_ind
+from dataclasses import dataclass
+import numpy as np
 
+@dataclass
 class Data(object):
     """Class for getting all the files you wish to analyze and putting them in a single object
     
@@ -17,7 +20,8 @@ class Data(object):
 
     def __init__(self, path=os.path.dirname(os.path.abspath(__name__))):
         self.path = path
-        self.files = pd.DataFrame(data=os.listdir(self.path), columns=["files"])
+        _data = os.listdir(self.path)
+        self.files = pd.DataFrame(data={"pwd": path,"files": _data})
 
     def parse_files(self):
         """Find all of the files you wish to score
@@ -26,7 +30,7 @@ class Data(object):
         ----------
         """
 
-        self.files = self.files[self.files["files"].str.endswith('csv')]
+        self.files = self.files[self.files["files"].str.endswith('csv')].reset_index(drop=True)
         
         # return
         self.numfiles = len(self.files)
@@ -42,89 +46,8 @@ class Data(object):
              Tuple of subject IDs that match the filenames. 
         """
 
-        self.files = self.files.drop(self.files[self.files["files"].str.startswith(subids)].index)
+        self.files = self.files.drop(self.files[self.files["files"].str.startswith(subids)].index).reset_index(drop=True)
         self.numfiles = len(self.files)
-
-        return self
-
-
-    def clean(self):
-        """Remove erroneous columns from .csv file generated from PsychoPy"""
-
-        # remove unnecessary columns 
-        label = ['example_outer_loop.thisRepN',
-        'example_outer_loop.thisTrialN',
-        'example_outer_loop.thisN',
-        'example_outer_loop.thisIndex',
-        'example_inner_loop.thisRepN',
-        'example_inner_loop.thisTrialN',
-        'example_inner_loop.thisN',
-        'example_inner_loop.thisIndex',
-        'example_shift_loop.thisRepN',
-        'example_shift_loop.thisTrialN',
-        'example_shift_loop.thisN',
-        'example_shift_loop.thisIndex',
-        'trials_loop.thisRepN',
-        'trials_loop.thisTrialN',
-        'trials_loop.thisN',
-        'trials_loop.thisIndex',
-        'transition_loop.thisRepN',
-        'transition_loop.thisTrialN',
-        'transition_loop.thisN',
-        'transition_loop.thisIndex',
-        'blocks_loop.thisRepN',
-        'blocks_loop.thisTrialN',
-        'blocks_loop.thisN',
-        'blocks_loop.thisIndex',
-        'word_loop.thisRepN',
-        'word_loop.thisTrialN',
-        'word_loop.thisN',
-        'word_loop.thisIndex',
-        'replay_msg_loop.thisRepN',
-        'replay_msg_loop.thisTrialN',
-        'replay_msg_loop.thisN',
-        'replay_msg_loop.thisIndex',
-        'instructions1_key.keys',
-        'instructions1_key.rt',
-        'instructions2_key.keys',
-        'instructions2_key.rt',
-        'instructions3_key.keys',
-        'instructions3_key.rt',
-        'instructions4_key.keys',
-        'instructions4_key.rt',
-        'shift1.started',
-        'shift1.stopped',
-        'shift2_2.started',
-        'shift2_2.stopped',
-        'instructions5_key.keys',
-        'instructions5_key.rt',
-        'word_sound.started',
-        'word1_shape.started',
-        'word_sound.stopped',
-        'word1_shape.stopped',
-        'jitter_shape.started',
-        'jitter_shape.stopped',
-        # 'shift2_shape.started',
-        # 'shift2_shape.stopped',
-        'replay_msg_text.started',
-        'response_text.started',
-        'key_resp.started',
-        'replay_msg_text.stopped',
-        'participant',
-        'order',
-        'date',
-        'expName',
-        'psychopyVersion',
-        'frameRate']
-
-        # read in the datafile
-        for i in self.files:
-            df = pd.read_csv(i)
-            try:
-                df = df.drop(columns=label)
-                df.to_csv(i)
-            except:
-                KeyError
 
         return self
 
@@ -137,18 +60,17 @@ class Data(object):
         str_scores = []
         rand_scores = []
 
-        for i in self.files:
+        for i, j in self.files.iterrows():
 
-            # read in the file
-            df = pd.read_csv(i)
+            _i = pd.read_csv(f'{j["pwd"]}/{j["files"]}')
 
             order = []
-            if df['blocks'][5] == 'block1.csv':
+            if _i['blocks'][5] == 'block1.csv':
                 order = 1
-            elif df['blocks'][5] == 'block12.csv':
+            elif _i['blocks'][5] == 'block12.csv':
                 order = 2
 
-            anskey['actual_key_resp'] = list(df['key_resp.keys'][5:29].dropna())
+            anskey['actual_key_resp'] = list(_i['key_resp.keys'][5:29].dropna())
 
             # set answer key based on order set a few chunks earlier
             answers =  ['z', 'v', 'v',  'z', 'm', 'z', 'z','v', 'm','v', 'v', 'm']
@@ -157,32 +79,22 @@ class Data(object):
             elif order == 2:
                 anskey['correct_key_resp'] = answers[::-1]
 
-            for j in range(12):
-                if anskey['correct_key_resp'][j] == anskey['actual_key_resp'][j]:
-                    anskey['assign_codes'][j] = 1
-                else:
-                    anskey['assign_codes'][j] = 0
+            anskey["assign_codes"] = anskey.apply(lambda x: 1 if x["actual_key_resp"] == x["correct_key_resp"] else 0, axis=1)
+
             # get score
             anskey['score'][0] = (sum(anskey['assign_codes']))/12;
-            score = anskey['score'][0]
-        
-            fn = i.split('/')[-1] # filename
-            cond = fn.split('_')[1].split('.')[0] #condition
+            score = anskey['score'][0];
 
+            #get cond
+            cond = j["files"].split('_')[1].split('.')[0]
             if cond == 'structured':
                 str_scores.append(score)
             elif cond == 'random':
                 rand_scores.append(score)
 
-        scores = pd.DataFrame(columns=['structured', 'random'])
-        try:
-            scores['structured'] = str_scores
-            scores['random'] = rand_scores
-        except:
-            ValueError
-
-        self.anskey = anskey
-        self.scores = scores
+        str_scores = pd.DataFrame(data={'structured': str_scores})
+        rand_scores = pd.DataFrame(data={'random': rand_scores})
+        self.scores = pd.concat([rand_scores, str_scores], axis=1)
 
         return self
     
@@ -194,22 +106,20 @@ class Data(object):
         subid: str
             single subject ID that matches filename
         """
+
         anskey = pd.DataFrame(columns=['correct_key_resp', 'actual_key_resp', 'assign_codes', 'score'])
 
-        file = []
-        for filename in self.files:
-            if filename.split('/')[-1].split('_')[0] == subid:
-                file.append(filename)
+        file_idx = np.where(self.files["files"].str.startswith(subid))
                 
-        df = pd.read_csv(file[0])
+        _i = pd.read_csv(f'{self.files["pwd"][file_idx[0][0]]}/{self.files["files"][file_idx[0][0]]}')
 
         order = []
-        if df['blocks'][5] == 'block1.csv':
+        if _i['blocks'][5] == 'block1.csv':
             order = 1
-        elif df['blocks'][5] == 'block12.csv':
+        elif _i['blocks'][5] == 'block12.csv':
             order = 2
 
-        anskey['actual_key_resp'] = list(df['key_resp.keys'][5:29].dropna())
+        anskey['actual_key_resp'] = list(_i['key_resp.keys'][5:29].dropna())
 
         # set answer key based on order set a few chunks earlier
         answers =  ['z', 'v', 'v',  'z', 'm', 'z', 'z','v', 'm','v', 'v', 'm']
@@ -218,18 +128,15 @@ class Data(object):
         elif order == 2:
             anskey['correct_key_resp'] = answers[::-1]
 
-        for j in range(12):
-            if anskey['correct_key_resp'][j] == anskey['actual_key_resp'][j]:
-                anskey['assign_codes'][j] = 1
-            else:
-                anskey['assign_codes'][j] = 0
+        anskey["assign_codes"] = anskey.apply(lambda x: 1 if x["actual_key_resp"] == x["correct_key_resp"] else 0, axis=1)
+
         # get score
         anskey['score'][0] = (sum(anskey['assign_codes']))/12;
-        
+
         return anskey
 
         
-
+@dataclass
 class Stats(Data):
     """Class to compute a 1 sample, 1 tailed t-test or two-samples independant, two tailed t-test
     
@@ -268,11 +175,10 @@ class Stats(Data):
 
         if self.test == '1samp':
              # compute test
-            statistic = ttest_1samp(self.scores['structured'], popmean=self.mu, alternative='greater')
+            self.statistic = ttest_1samp(self.scores['structured'], popmean=self.mu, alternative='greater', nan_policy='omit')
 
-        elif self.test == '1samp':
+        elif self.test == 'ind':
             # compute test
-            statistic = ttest_ind(a=self.scores['structured'], b=self.scores['random'], equal_var=False, alternative='two-sided')
+            self.statistic = ttest_ind(a=self.scores['structured'], b=self.scores['random'], equal_var=True, alternative='greater', nan_policy='omit')
 
-        self.statistic=statistic
         return self
