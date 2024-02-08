@@ -18,5 +18,9 @@ docker --rm --it \
 -v $didir:/data:ro \
 -v $bidsdir:output \
 nipy/heudiconv:latest \
-
-
+-d /data/{subject}/{session}/*.MRDC.* \
+-s sub-005 \
+-ss Ser1
+-f convertall \
+-c none \ 
+-o /output
