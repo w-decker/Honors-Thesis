@@ -2,6 +2,8 @@
 
 # imports for this module
 import pandas as pd
+pd.options.mode.chained_assignment = None
+
 import os 
 from scipy.stats import ttest_1samp, ttest_ind
 from dataclasses import dataclass
