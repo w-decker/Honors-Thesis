@@ -136,6 +136,54 @@ class Data(object):
         anskey['score'][0] = (sum(anskey['assign_codes']))/12;
 
         return anskey
+    
+    def cat_score(self):
+        """Get accuracy for other stimuli categories (e.g., foils or part words)
+        
+        """
+        cat_anskey_columns = ['foil_correct_key_resp', 'part_correct_key_resp', 'actual_key_resp', 'foil_codes', 'part_codes', 'foil_score', 'part_score']
+        cat_anskey = pd.DataFrame(columns=cat_anskey_columns)
+
+        category_scores = {
+            'rand_foil_scores': [],
+            'rand_part_scores': [],
+            'str_foil_scores': [],
+            'str_part_scores': []
+        }
+
+        foil_answers =  ['v', 'm', 'm', 'v', 'z', 'm', 'm', 'm', 'v', 'z', 'z', 'z']
+        part_answers = ['m', 'z', 'z', 'm', 'v', 'v', 'v', 'z', 'z', 'm', 'm', 'v']
+
+        for i, j in self.files.iterrows():
+            _i = pd.read_csv(f'{j["pwd"]}/{j["files"]}')
+            order = 1 if _i['blocks'][5] == 'block1.csv' else 2
+
+            cat_anskey['actual_key_resp'] = list(_i['key_resp.keys'][5:29].dropna())
+
+            if order == 1:
+                cat_anskey['foil_correct_key_resp'] = foil_answers
+                cat_anskey['part_correct_key_resp'] = part_answers
+            elif order == 2:
+                cat_anskey['foil_correct_key_resp'] = foil_answers[::-1]
+                cat_anskey['part_correct_key_resp'] = part_answers[::-1]
+
+            cat_anskey["foil_codes"] = cat_anskey.apply(lambda x: int(x["actual_key_resp"] == x['foil_correct_key_resp']), axis=1)
+            cat_anskey["part_codes"] = cat_anskey.apply(lambda x: int(x["actual_key_resp"] == x['part_correct_key_resp']), axis=1)
+
+            cat_anskey['foil_score'] = sum(cat_anskey['foil_codes']) / 12
+            cat_anskey['part_score'] = sum(cat_anskey['part_codes']) / 12
+
+            cond = j["files"].split('_')[1].split('.')[0]
+            if cond == 'structured':
+                category_scores['str_foil_scores'].append(cat_anskey['foil_score'].iloc[0])
+                category_scores['str_part_scores'].append(cat_anskey['part_score'].iloc[0])
+            elif cond == 'random':
+                category_scores['rand_foil_scores'].append(cat_anskey['foil_score'].iloc[0])
+                category_scores['rand_part_scores'].append(cat_anskey['part_score'].iloc[0])
+
+        self.category_scores = pd.DataFrame(category_scores)
+
+        return self
 
         
 @dataclass
