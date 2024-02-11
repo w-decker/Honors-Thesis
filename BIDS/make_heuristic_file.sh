@@ -1,26 +1,26 @@
-#!/usr/bin/bash -i
+#!/usr/bin/bash
 
-# get directories
-while getopts b:d: flag
-do
+# get flags
+while getopts "b:d:s:" flag; do
     case "${flag}" in
-        b) bidsdir=${OPTARG};;
-        d) didir=${OPTARG};;
+        b) bids_path=${OPTARG} ;;
+        d) dcm_path=${OPTARG} ;;
+        s) subj=${OPTARG} ;;
+        *) echo "Invalid option"; exit 1 ;;
     esac
 done
 
-# output
-echo "Your BIDS directory is $bidsdir";
-echo "Your DICOM directory is $didir";
-
-# make heuristic file
-docker --rm --it \
--v $didir:/data:ro \
--v $bidsdir:output \
-nipy/heudiconv:latest \
--d /data/{subject}/{session}/*.MRDC.* \
--s sub-005 \
--ss Ser1
+# generate heuristic.py
+heudiconv \
+-s "$subj" \
+-d "$dcm_path/{subject}/*/*.MRDC.*" \
+-o "$bids_path" \
 -f convertall \
--c none \ 
--o /output
+-c none \
+--overwrite
+
+# move heuristic files to main dicom dir
+cp -r "$bids_path.heudiconv/$subj/info/" "$dcm_path"
+
+
+
