@@ -10,7 +10,7 @@ def create_key(template, outtype=('nii.gz','dicom'), annotation_classes=None):
 def infotodict(seqinfo):
     t1w = create_key("sub-{subject}/anat/sub-{subject}_T1w")
     rest = create_key("sub-{subject}/func/sub-{subject}_task-rest_bold")
-    dwi = create_key("sub-{subject}/dti/sub-{subject}_dti")
+    dwi = create_key("sub-{subject}/dwi/sub-{subject}_dwi")
     stat_learning = create_key("sub-{subject}/func/sub-{subject}_task-statlearning_bold")
 
     info = {t1w: [], rest: [], dwi: [], stat_learning: []}
