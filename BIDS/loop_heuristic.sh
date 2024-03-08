@@ -28,5 +28,5 @@ do
 done
 
 # change file permissions for fMRIPrep
-find $bidspath/sub-${pid//_} -exec chmod ug+w {} \;
+find $bidspath/sub-${$subs//_} -exec chmod ug+w {} \;
 find $bids_path/.heudiconv/${pid//_} -exec chmod ug+w {} \;
