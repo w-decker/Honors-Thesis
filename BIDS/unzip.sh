@@ -1,10 +1,14 @@
-#!/usr/bin/bash -i
+#!/bin/bash
 
-while getopts d: flag
+while getopts :p: flag
 do
     case ${flag} in 
-        d) path=${OPTARG};;
+        p) path=${OPTARG};;
     esac
 done
 
-tar -kxvzf ${path} -C ${path}
+subs=(${path}/*.tgz)
+
+for sub in "${subs[@]}"; do
+    tar -xvzf "${sub}" -C "${path}"
+done
